@@ -32,5 +32,5 @@ func NewCustomer(name string) (Customer, error) {
 		person:       person,
 		products:     make([]*entity.Item, 0),
 		transactions: make([]value_object.Transaction, 0),
-	}
+	}, nil
 }
