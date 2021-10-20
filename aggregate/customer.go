@@ -35,6 +35,10 @@ func NewCustomer(name string) (Customer, error) {
 	}, nil
 }
 
+func (c *Customer) GetID() uuid.UUID {
+	return c.person.ID
+}
+
 func (c *Customer) SetID(id uuid.UUID) {
 	if c.person == nil {
 		c.person = &entity.Person{}
