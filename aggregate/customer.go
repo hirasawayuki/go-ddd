@@ -34,3 +34,23 @@ func NewCustomer(name string) (Customer, error) {
 		transactions: make([]value_object.Transaction, 0),
 	}, nil
 }
+
+func (c *Customer) SetID(id uuid.UUID) {
+	if c.person == nil {
+		c.person = &entity.Person{}
+	}
+
+	c.person.ID = id
+}
+
+func (c *Customer) SetName(name string) {
+	if c.person == nil {
+		c.person = &entity.Person{}
+	}
+
+	c.person.Name = name
+}
+
+func (c *Customer) GetName() string {
+	return c.person.Name
+}
