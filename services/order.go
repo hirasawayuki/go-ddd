@@ -1,6 +1,10 @@
 package services
 
-import "github.com/hirasawayuki/go-ddd/domain/customer"
+import (
+	"github.com/google/uuid"
+	"github.com/hirasawayuki/go-ddd/domain/customer"
+	"github.com/hirasawayuki/go-ddd/memory"
+)
 
 type OrderConfiguration func(os *OrderService) error
 
@@ -17,4 +21,25 @@ func NewOrderService(cfgs ...OrderConfiguration) (*OrderService, error) {
 		}
 	}
 	return os, nil
+}
+
+func WithCostomerRepository(cr customer.CustomerRepository) OrderConfiguration {
+	return func(os *OrderService) error {
+		os.customers = cr
+		return nil
+	}
+}
+
+func WithMemoryCustomerRepository() OrderConfiguration {
+	cr := memory.New()
+	return WithCostomerRepository(cr)
+}
+
+func (o *OrderService) CreateOrder(customerID uuid.UUID, productIDs []uuid.UUID) error {
+	_, err := o.customers.Get(customerID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
