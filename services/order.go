@@ -3,7 +3,7 @@ package services
 import (
 	"github.com/google/uuid"
 	"github.com/hirasawayuki/go-ddd/domain/customer"
-	"github.com/hirasawayuki/go-ddd/memory"
+	"github.com/hirasawayuki/go-ddd/domain/customer/memory"
 )
 
 type OrderConfiguration func(os *OrderService) error
